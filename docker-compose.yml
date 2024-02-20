@@ -1,0 +1,20 @@
+version: '3'
+services:
+  my-react-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8085:80
+    depends_on:
+      - mynginx
+
+  mynginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
